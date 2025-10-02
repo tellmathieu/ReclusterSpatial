@@ -1,0 +1,6 @@
+name: recluster
+dependencies:
+ - conda-forge::r-seurat>=5.2.0
+ - conda-forge::r-tidyverse>=2.0.0
+ - conda-forge::r-spatial>=7.2
+ - conda-forge::r-sf

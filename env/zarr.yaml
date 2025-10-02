@@ -1,0 +1,4 @@
+name: zarr
+dependencies:
+ - conda-forge::zarr >=2.0.0,<3.0.0
+ - conda-forge::numpy>=2.3.0
