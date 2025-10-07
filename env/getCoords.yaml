@@ -1,0 +1,7 @@
+name: getCoords
+dependencies:
+  - conda-forge::r-seurat>=5.3.0
+  - conda-forge::r-tidyverse>=2.0
+  - conda-forge::r-spatial>=7.0
+  - conda-forge::r-sf
+  - conda-forge::r-arrow

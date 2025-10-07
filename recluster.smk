@@ -11,8 +11,8 @@ from multiprocessing import cpu_count
 #        Input        #
 #######################
 
-fileDetails = "/Users/tell/Desktop/spatialtrans/xenium/xenium_file_details.csv"
-dataDir = "/Users/tell/Desktop/spatialtrans/xenium/data"
+fileDetails = "/home/tmathieu/xenium/xenium_file_details.csv"
+dataDir = "/home/tmathieu/xenium/data"
 
 #######################
 #     Variables       #

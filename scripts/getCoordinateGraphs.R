@@ -41,11 +41,16 @@ xenium.obj.orig <- LoadXenium(data.dir, fov = "fov")
 
 xenium.obj <- xenium.obj.orig
 
+print("Xenium object loaded")
+
 # remove cells with zero counts
 xenium.obj <- subset(xenium.obj.orig, subset = nCount_Xenium > 0)
+
+print("Removed cells with zero count")
 
 pdf(outputfile)
 ImageDimPlot(xenium.obj, axes = TRUE, border.color = "white", border.size = 0.1, cols = "polychrome",
              coord.fixed = TRUE, nmols = 10000, flip_xy = FALSE)
 dev.off()
 
+print("Saved coordinates graph")
