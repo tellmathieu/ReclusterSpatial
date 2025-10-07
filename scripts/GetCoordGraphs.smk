@@ -11,8 +11,8 @@ from multiprocessing import cpu_count
 #        Input        #
 #######################
 
-dataDir = "/Users/tell/Desktop/spatialtrans/xenium/data"
-fileDetails = "/Users/tell/Desktop/spatialtrans/xenium/xenium_file_details.csv"
+dataDir = "/home/tmathieu/xenium/data"
+fileDetails = "/home/tmathieu/xenium/xenium_file_details.csv"
 
 #######################
 #     Variables       #
@@ -32,10 +32,11 @@ manifest = pd.read_csv(fileDetails)
 tar_file_id = []
 for num in range(0,len(manifest)-1):
 	if manifest["tar_file_id"][num] in filesAvail:
-		if pd.isnull(manifest["x_min"][num]) is False:
-			tar_file_id.append(manifest["tar_file_id"][num])
+		tar_file_id.append(manifest["tar_file_id"][num])
 
+print(tar_file_id)
 tar_file_id = list(set(tar_file_id))
+print(tar_file_id)
 
 coordScript = os.path.join(mainDir, "scripts", "getCoordinateGraphs.R")
 graph = os.path.join(dataDir, "{tar_file_id}", "{tar_file_id}_coordinate_graph_all.pdf")
@@ -46,9 +47,7 @@ rule all:
 
 rule reclustering:
 	threads: cpu_count()
-	conda: "env/getCoords.yaml"
-	input:
-		fileDetails = fileDetails,
+	conda: "../env/getCoords.yaml"
 	params: 
 		dataDir = dataDir,
 		coordScript = coordScript
@@ -58,7 +57,6 @@ rule reclustering:
 		#run script for getting coord graphs
 		Rscript {params.coordScript} \
 			{params.dataDir} \
-			{wildcards.tar_file_id}
-			{input.fileDetails} \
+			{wildcards.tar_file_id} \
 			{output.graph}
 	'''
