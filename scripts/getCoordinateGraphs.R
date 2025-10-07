@@ -6,13 +6,12 @@ suppressPackageStartupMessages(library(arrow))
 
 args = commandArgs(trailingOnly=TRUE)
 
-if (length(args) != 4) {
-  stop("Four arguments are required", call.=FALSE)
-} else if (length(args)==4) {
+if (length(args) != 3) {
+  stop("Three arguments are required", call.=FALSE)
+} else if (length(args)==3) {
   wd = args[1]
   file_id = args[2]
-  file_details = args[3]
-  outputfile = args[4]
+  outputfile = args[3]
 }
 
 # setting variables for testing
@@ -26,7 +25,6 @@ if (length(args) != 4) {
 # set working directory, based on input, and pick xenium folder
 setwd(wd)
 data.dir <- file.path(wd,file_id)
-details <- read.csv(file_details)
 
 # create transcripts.csv if it doesn't already exist. 
 # Older version of Xenium output included it, but with this version, 

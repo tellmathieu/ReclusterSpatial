@@ -2,6 +2,7 @@ suppressPackageStartupMessages(library(Seurat))
 suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(spatial))
 suppressPackageStartupMessages(library(sf))
+suppressPackageStartupMessages(library(arrow))
 
 args = commandArgs(trailingOnly=TRUE)
 
@@ -18,13 +19,15 @@ if (length(args) != 7) {
 }
 
 # setting variables for testing
-#data.dir <- "/Users/tell/Desktop/spatialtrans/xenium/data/0055468_wt-d5_r_0.2-0.8_b_g"
-#file_details = "/Users/tell/Desktop/spatialtrans/xenium/xenium_file_details.csv"
-#section_id = '19_wt_r_0.8b'
-#cluster_folder = file.path(data.dir,"analysis","clustering","gene_expression_custom_clusters")
-#cluster_csv_orig = file.path(cluster_folder,paste0("clusters_orig_", section_id, ".csv"))
-#cluster_csv_final = file.path(cluster_folder,paste0("clusters_final_", section_id, ".csv"))
-#post_analysis_path = "/Users/tell/Desktop/spatialtrans/xenium/data/0055468_wt-d5_r_0.2-0.8_b_g/post_analysis"
+wd <- "/Users/tell/Desktop/spatialtrans/xenium/data"
+data.dir <- "/Users/tell/Desktop/spatialtrans/xenium/data"
+file_details <- "/Users/tell/Desktop/spatialtrans/xenium/xenium_file_details.csv"
+file_id <- "0055596_wt_r_2-3_a"
+section_id = '1_wt_r_3'
+cluster_folder = file.path(data.dir,"analysis","clustering","gene_expression_custom_clusters")
+cluster_csv_orig = file.path(cluster_folder,paste0("clusters_orig_", section_id, ".csv"))
+cluster_csv_final = file.path(cluster_folder,paste0("clusters_final_", section_id, ".csv"))
+post_analysis_path = paste0("/Users/tell/Desktop/spatialtrans/xenium/data/",file_id)
 
 # set working directory, based on input, and pick xenium folder
 setwd(wd)
@@ -35,6 +38,11 @@ x_max <- as.numeric(details$x_max[details$section_id==section_id])
 y_min <- as.numeric(details$y_min[details$section_id==section_id])
 y_max <- as.numeric(details$y_max[details$section_id==section_id])
 
+# for manual fov adjustments
+x_min <- 3500
+x_max <- 6500
+y_min <- 0
+y_max <- 4000
 
 # create transcripts.csv if it doesn't already exist. 
 # Older version of Xenium output included it, but with this version, 
